@@ -73,6 +73,7 @@ const reset = () => {
   status1.innerHTML = '';
   i = 1;
   win = false;
+  restart.innerHTML = '';
 }
 
 

@@ -34,9 +34,6 @@ const checkWin = (player) => {
 }
 
 const game = () => {
-  const x = 'X';
-  const circle = 'O';
-
   if (checkWin(x)) {
     status1.innerHTML = `Player 2 Wins`;
     count[1].innerHTML = parseInt(count[1].innerHTML) + 1;
@@ -47,7 +44,6 @@ const game = () => {
     status1.innerHTML = "Draw";
   }
 }
-
 
 box.forEach((e) => {
   e.addEventListener('click', () => {

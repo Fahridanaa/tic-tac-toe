@@ -10,25 +10,33 @@
   <body>
     <div id="container">
       <div id="header">TicTacToe</div>
-      <div id="status">Player 1 WIN</div>
+      <div id="status"></div>
       <div id="gameboard">
-        <div class="box" id="box-1">
-          <img src="assets/o.png" alt="" />
+        <div id="board">
+          <div class="box" id="box-1"></div>
+          <div class="box" id="box-2"></div>
+          <div class="box" id="box-3"></div>
+          <div class="box" id="box-4"></div>
+          <div class="box" id="box-5"></div>
+          <div class="box" id="box-6"></div>
+          <div class="box" id="box-7"></div>
+          <div class="box" id="box-8"></div>
+          <div class="box" id="box-9"></div>
         </div>
-        <div class="box" id="box-2">
-          <img src="assets/x.png" alt="" />
+        <div class="score1">
+          <div class="name">Player 1:</div>
+          <div class="count">0</div>
         </div>
-        <div class="box" id="box-3"></div>
-        <div class="box" id="box-4"></div>
-        <div class="box" id="box-5"></div>
-        <div class="box" id="box-6"></div>
-        <div class="box" id="box-7"></div>
-        <div class="box" id="box-8"></div>
-        <div class="box" id="box-9"></div>
+        <div class="score2">
+          <div class="name">Player 2:</div>
+          <div class="count">0</div>
+        </div>
       </div>
       <div id="buttons">
         <div id="restart">
-          <button><img src="assets/restart.png" class="icon" /></button>
+          <button onclick="reset();">
+            <img src="assets/restart.png" class="icon" />
+          </button>
         </div>
       </div>
     </div>

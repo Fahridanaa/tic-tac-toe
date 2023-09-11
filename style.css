@@ -13,7 +13,7 @@ body {
 #container {
   height: 100%;
   display: flex;
-  justify-content: center;
+  align-items: center;
   flex-direction: column;
   gap: 16px;
 }
@@ -33,6 +33,7 @@ body {
 #status {
   text-align: center;
   color: hsl(80, 80%, 75%);
+  height: 3rem;
   font-size: 2rem;
   font-weight:700;
   margin-top: 32px;
@@ -40,8 +41,23 @@ body {
 
 #gameboard {
   flex: 4;
-  width: 35%;
-  margin: 0px auto;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.score1 {
+  flex: 1;
+  order: 1;
+  align-self: center;
+  text-align: center;
+  font-weight: 900;
+}
+
+#board {
+  order: 2;
+  height: 100%;
+  width: 40rem;
   background-color: black;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -49,6 +65,22 @@ body {
   gap: 16px;
   border: 3px solid hsl(0, 5%, 70%);
   border-radius: 10px;
+}
+
+.score2 {
+  flex: 1;
+  order: 3;
+  align-self: center;
+  text-align: center;
+  font-weight: 900;
+}
+
+.name {
+  font-size: 2rem;
+}
+
+.count {
+  font-size: 3rem;
 }
 
 #gameboard .box {
@@ -89,7 +121,7 @@ body {
 }
 
 button:hover {
-  background: blue;
+  transform: translateY(-2px);
 }
 
 button:active {

@@ -2,10 +2,15 @@ let status1 = document.getElementById("status");
 let box = document.querySelectorAll(".box");
 let count = document.querySelectorAll(".count");
 let i = 1;
-let circle = `<img src="assets/o.png" alt="" />`
-let x = `<img src="assets/x.png" alt="" />`
+let circle = `<img src="assets/o.png">`
+let x = `<img src="assets/x.png">`
+let win = false;
+let restartbtn = `<button onclick="reset();">
+<img src="assets/restart.png" class="icon" />
+</button>`
+let restart = document.getElementById("restart");
 
-const makeimg = (e) => {
+const makeImg = (e) => {
   if(i % 2 == 0) {
     e.innerHTML += x;
     i++;
@@ -25,11 +30,12 @@ const checkWin = (player) => {
   for (const line of lines) {
     const [a, b, c] = line;
     if (document.getElementById(`box-${a}`).innerHTML == player &&
-        document.getElementById(`box-${b}`).innerHTML == player &&
-        document.getElementById(`box-${c}`).innerHTML == player) {
+    document.getElementById(`box-${b}`).innerHTML == player &&
+    document.getElementById(`box-${c}`).innerHTML == player) {
       return true;
     }
   }
+ 
   return false;
 }
 
@@ -37,20 +43,26 @@ const game = () => {
   if (checkWin(x)) {
     status1.innerHTML = `Player 2 Wins`;
     count[1].innerHTML = parseInt(count[1].innerHTML) + 1;
+    win = true;
+    restart.innerHTML = restartbtn;
   } else if (checkWin(circle)) {
     status1.innerHTML = `Player 1 Wins`;
     count[0].innerHTML = parseInt(count[0].innerHTML) + 1;
-  } else if (Array.from({ length: 9 }, (_, i) => box[i].innerHTML).every(val => val != '')) {
+    win = true;
+    restart.innerHTML = restartbtn;
+  } else if (Array.from({ length: 9 }, (_, i) => box[i].innerHTML).every((e) => e != '')) {
     status1.innerHTML = "Draw";
   }
 }
 
 box.forEach((e) => {
   e.addEventListener('click', () => {
-    if(!e.hasChildNodes('img')) {
-      makeimg(e);
+    if(!win) {
+      if(!e.hasChildNodes('img')) {
+        makeImg(e);
+      }
+      game();
     }
-    game();
   })
 })
 
@@ -60,6 +72,7 @@ const reset = () => {
   })
   status1.innerHTML = '';
   i = 1;
+  win = false;
 }
 
 

@@ -52,6 +52,7 @@ const game = () => {
     restart.innerHTML = restartbtn;
   } else if (Array.from({ length: 9 }, (_, i) => box[i].innerHTML).every((e) => e != '')) {
     status1.innerHTML = "Draw";
+    restart.innerHTML = restartbtn;
   }
 }
 

@@ -1,22 +1,21 @@
 let status1 = document.getElementById("status");
 let box = document.querySelectorAll(".box");
 let count = document.querySelectorAll(".count");
-let i = 1;
-let circle = `<img src="assets/o.png">`
-let x = `<img src="assets/x.png">`
 let win = false;
 let restartbtn = `<button onclick="reset();">
 <img src="assets/restart.png" class="icon" />
 </button>`
 let restart = document.getElementById("restart");
+let playerTurn = 0;
+const players = [
+  { name: 'Player 1', symbol: `<img src="assets/x.png">`, count: 0 },
+  { name: 'Player 2', symbol: `<img src="assets/o.png">`, count: 0 }
+];
 
-const makeImg = (e) => {
-  if(i % 2 == 0) {
-    e.innerHTML += x;
-    i++;
-  }else {
-    e.innerHTML += circle;
-    i++;
+const makeMove = (box, player) => {
+  if (!box.hasChildNodes() && !win) {
+    box.innerHTML += players[player].symbol;
+    playerTurn = (playerTurn + 1) % 2;
   }
 }
 
@@ -32,6 +31,8 @@ const checkWin = (player) => {
     if (document.getElementById(`box-${a}`).innerHTML == player &&
     document.getElementById(`box-${b}`).innerHTML == player &&
     document.getElementById(`box-${c}`).innerHTML == player) {
+      restart.innerHTML = restartbtn;
+      win = true;
       return true;
     }
   }
@@ -40,16 +41,12 @@ const checkWin = (player) => {
 }
 
 const game = () => {
-  if (checkWin(x)) {
-    status1.innerHTML = `Player 2 Wins`;
-    count[1].innerHTML = parseInt(count[1].innerHTML) + 1;
-    win = true;
-    restart.innerHTML = restartbtn;
-  } else if (checkWin(circle)) {
+  if (checkWin(players[0].symbol)) {
     status1.innerHTML = `Player 1 Wins`;
-    count[0].innerHTML = parseInt(count[0].innerHTML) + 1;
-    win = true;
-    restart.innerHTML = restartbtn;
+    count[0].innerHTML = ++players[0].count;
+  } else if (checkWin(players[1].symbol)) {
+    status1.innerHTML = `Player 2 Wins`;
+    count[1].innerHTML = ++players[1].count;
   } else if (Array.from({ length: 9 }, (_, i) => box[i].innerHTML).every((e) => e != '')) {
     status1.innerHTML = "Draw";
     restart.innerHTML = restartbtn;
@@ -58,12 +55,10 @@ const game = () => {
 
 box.forEach((e) => {
   e.addEventListener('click', () => {
-    if(!win) {
-      if(!e.hasChildNodes('img')) {
-        makeImg(e);
+    if(!(win && e.hasChildNodes('img'))) {
+        makeMove(e, playerTurn);
       }
       game();
-    }
   })
 })
 
